@@ -10,6 +10,11 @@ public class Unit : MonoBehaviour
 
     private float _stoppingDistance = 0.1f;
 
+    private void Start()
+    {
+        _targetPosition = transform.position;
+    }
+
     private void Update()
     {
         if (Vector3.Distance(transform.position, _targetPosition) > _stoppingDistance)
