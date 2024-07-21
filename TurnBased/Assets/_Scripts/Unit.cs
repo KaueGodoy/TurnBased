@@ -5,6 +5,8 @@ public class Unit : MonoBehaviour
 
     private Vector3 _targetPosition;
 
+    [SerializeField] private Animator _animator;
+
     [SerializeField] private float _moveSpeed = 4f;
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
 
@@ -21,6 +23,12 @@ public class Unit : MonoBehaviour
         {
             Vector3 moveDirection = (_targetPosition - transform.position).normalized;
             transform.position += moveDirection * MoveSpeed * Time.deltaTime;
+            
+            _animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            _animator.SetBool("IsWalking", false);
         }
 
         if (Input.GetMouseButtonDown(0))
