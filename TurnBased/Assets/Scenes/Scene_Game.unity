@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 885112149}
   _moveSpeed: 4
+  _rotateSpeed: 8
 --- !u!1001 &127125830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1957,6 +1958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 825461367}
   _moveSpeed: 4
+  _rotateSpeed: 8
 --- !u!1 &539349498
 GameObject:
   m_ObjectHideFlags: 0
