@@ -4,10 +4,23 @@ using UnityEngine.EventSystems;
 
 public class UnitActionSystem : MonoBehaviour
 {
+    public static UnitActionSystem Instance { get; private set; }
+
     public event EventHandler OnSelectedUnitChanged;
 
     [SerializeField] private Unit _selectedUnit;
     [SerializeField] private LayerMask _unitLayerMask;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("Instance already exists" + transform + " - " + Instance);
+            Destroy(Instance);
+        }
+
+        Instance = this;
+    }
 
     private void Update()
     {
