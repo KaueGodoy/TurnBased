@@ -17,6 +17,7 @@ public class UnitActionSystem : MonoBehaviour
         {
             Debug.LogError("Instance already exists" + transform + " - " + Instance);
             Destroy(Instance);
+            return;
         }
 
         Instance = this;
@@ -32,7 +33,7 @@ public class UnitActionSystem : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            TryToHandleUnitSelection();
+            if (TryToHandleUnitSelection()) return;
         }
     }
 
