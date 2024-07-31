@@ -4,11 +4,13 @@ public class GridSystem
 {
     private int _width;
     private int _height;
+    private float _cellSize;
 
-    public GridSystem(int width, int height)
+    public GridSystem(int width, int height, float cellSize)
     {
         _width = width;
         _height = height;
+        _cellSize = cellSize;
 
         for (int x = 0; x < width; x++)
         {
@@ -22,7 +24,7 @@ public class GridSystem
 
     public Vector3 GetWorldPosition(int x, int z)
     {
-        return new Vector3(x, 0, z);
+        return new Vector3(x, 0, z) * _cellSize;
     }
 
 }
