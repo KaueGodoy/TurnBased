@@ -8,4 +8,9 @@ public struct GridPosition
         this.x = x; 
         this.z = z;
     }
+
+    public override string ToString()
+    {
+        return $"x: {x}, z: {z}";
+    }
 }
