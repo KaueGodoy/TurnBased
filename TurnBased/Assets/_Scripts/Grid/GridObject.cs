@@ -7,5 +7,10 @@ public class GridObject
     {
         _gridSystem = gridSystem;
         _gridPosition = gridPosition;
-    }       
+    }
+
+    public override string ToString()
+    {
+        return _gridPosition.ToString();
+    }
 }
