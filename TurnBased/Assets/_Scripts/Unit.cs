@@ -17,6 +17,12 @@ public class Unit : MonoBehaviour
         _targetPosition = transform.position;
     }
 
+    private void Start()
+    {
+        GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        LevelGrid.Instance.SetUnitAtGridPosition(gridPosition, this);
+    }
+
     private void Update()
     {
         if (Vector3.Distance(transform.position, _targetPosition) > _stoppingDistance)
@@ -25,7 +31,7 @@ public class Unit : MonoBehaviour
             transform.position += moveDirection * MoveSpeed * Time.deltaTime;
 
             transform.forward = Vector3.Lerp(transform.forward, moveDirection, RotateSpeed * Time.deltaTime);
-            
+
             _animator.SetBool("IsWalking", true);
         }
         else

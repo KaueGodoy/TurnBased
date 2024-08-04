@@ -16,7 +16,7 @@ public class UnitActionSystem : MonoBehaviour
         if (Instance != null)
         {
             Debug.LogError("Instance already exists" + transform + " - " + Instance);
-            Destroy(Instance);
+            Destroy(gameObject);
             return;
         }
 
