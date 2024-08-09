@@ -602,8 +602,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30040762, y: -0.037443526, z: 0.011803032, w: 0.95300263}
-  m_LocalPosition: {x: 8.78459, y: 7, z: -6.4291735}
+  m_LocalRotation: {x: 0.3307532, y: -0.037046615, z: 0.012995314, w: 0.94290036}
+  m_LocalPosition: {x: 8.78459, y: 8.00005, z: -6.4291735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1113,8 +1113,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816305379}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30040762, y: -0.03744352, z: 0.011803028, w: 0.95300263}
-  m_LocalPosition: {x: 8.78459, y: 7, z: -6.4291735}
+  m_LocalRotation: {x: 0.33075318, y: -0.037046615, z: 0.012995317, w: 0.94290036}
+  m_LocalPosition: {x: 8.78459, y: 8.00005, z: -6.4291735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2586,8 +2586,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef35cf4a4d450b046b85d2bfd150b4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cinemachineVirtualCamera: {fileID: 816305380}
   _moveSpeed: 10
-  _rotationSpeed: 10
+  _rotationSpeed: 50
+  _zoomAmount: 1
+  _zoomSpeed: 3
 --- !u!1 &1230158805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3135,7 +3138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 7, z: -10}
+  m_FollowOffset: {x: 0, y: 8.00005, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
