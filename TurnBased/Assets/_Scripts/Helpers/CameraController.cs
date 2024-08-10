@@ -29,6 +29,13 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        HandleMovement();
+        HandleRotation();
+        HandleZoom();
+    }
+
+    private void HandleMovement()
+    {
         Vector3 inputMoveDir = new Vector3(0, 0, 0);
 
         if (Input.GetKey(KeyCode.W))
@@ -50,7 +57,10 @@ public class CameraController : MonoBehaviour
 
         Vector3 moveVector = transform.forward * inputMoveDir.z + transform.right * inputMoveDir.x;
         transform.position += moveVector * MoveSpeed * Time.deltaTime;
+    }
 
+    private void HandleRotation()
+    {
         Vector3 rotationVector = new Vector3(0, 0, 0);
 
         if (Input.GetKey(KeyCode.E))
@@ -63,7 +73,10 @@ public class CameraController : MonoBehaviour
         }
 
         transform.eulerAngles += rotationVector * RotationSpeed * Time.deltaTime;
+    }
 
+    private void HandleZoom()
+    {
         if (Input.mouseScrollDelta.y > 0)
         {
             _targetFollowOffset.y -= ZoomAmount;
@@ -77,7 +90,6 @@ public class CameraController : MonoBehaviour
         _targetFollowOffset.y = Mathf.Clamp(_targetFollowOffset.y, Min_Follow_Y_Offset, Max_Follow_Y_Offset);
         _cinemachineTransposer.m_FollowOffset = Vector3.Lerp(_cinemachineTransposer.m_FollowOffset, _targetFollowOffset, Time.deltaTime * ZoomSpeed);
 
-        Debug.Log($"Cinemachine {_cinemachineTransposer.m_FollowOffset}, + Target {_targetFollowOffset}");
-
+        //Debug.Log($"Cinemachine {_cinemachineTransposer.m_FollowOffset}, + Target {_targetFollowOffset}");
     }
 }
