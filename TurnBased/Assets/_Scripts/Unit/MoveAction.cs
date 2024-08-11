@@ -64,7 +64,26 @@ public class MoveAction : MonoBehaviour
                 GridPosition offsetGridPosition = new GridPosition(x, z);
                 GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
 
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+                    // grid position with x and z >= 0 and within width and height
+                    continue;
+                }
+
+                if (unitGridPosition == testGridPosition)
+                {
+                    // Same grid position where the unit is already at
+                    continue;
+                }
+
+                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                {
+                    // There is a unit on this position = the grid obj list is not empty = count > 0
+                    continue;
+                }
+
                 Debug.Log(testGridPosition);
+                validGridPositionList.Add(testGridPosition);
             }
         }
 
