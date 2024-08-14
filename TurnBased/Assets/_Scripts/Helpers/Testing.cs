@@ -13,7 +13,8 @@ public class Testing : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            _unit.GetMoveAction().GetValidActionGridPositionList();
+            GridSystemVisual.Instance.HideAllGridPositions();
+            GridSystemVisual.Instance.ShowGridPositionList(_unit.GetMoveAction().GetValidActionGridPositionList());
         }
     }
 }
