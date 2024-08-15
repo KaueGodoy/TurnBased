@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MoveAction : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class MoveAction : MonoBehaviour
 
     private Vector3 _targetPosition;
     private float _stoppingDistance = 0.1f;
+    private bool _isActive = false;
 
     private Unit _unit;
 
@@ -31,24 +33,28 @@ public class MoveAction : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (!_isActive) return;
+
+        Vector3 moveDirection = (_targetPosition - transform.position).normalized;
+
         if (Vector3.Distance(transform.position, _targetPosition) > _stoppingDistance)
         {
-            Vector3 moveDirection = (_targetPosition - transform.position).normalized;
             transform.position += moveDirection * MoveSpeed * Time.deltaTime;
-
-            transform.forward = Vector3.Lerp(transform.forward, moveDirection, RotateSpeed * Time.deltaTime);
-
             _animator.SetBool("IsWalking", true);
         }
         else
         {
             _animator.SetBool("IsWalking", false);
+            _isActive = false;
         }
+
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection, RotateSpeed * Time.deltaTime);
     }
 
     public void Move(GridPosition gridPosition)
     {
         this._targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        _isActive = true;
     }
 
     public bool IsValidActionGridPosition(GridPosition gridPosition)

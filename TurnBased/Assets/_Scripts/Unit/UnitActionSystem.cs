@@ -39,7 +39,7 @@ public class UnitActionSystem : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            if (TryToHandleUnitSelection()) return;
+            _selectedUnit.GetSpinAction().Spin();
         }
     }
 
