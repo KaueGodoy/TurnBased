@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9112395036759098963}
+  - component: {fileID: 416422852791182295}
   - component: {fileID: 3576954948691970861}
   - component: {fileID: 8816760565582213841}
-  - component: {fileID: 416422852791182295}
   - component: {fileID: 8450059876715164368}
   m_Layer: 7
   m_Name: Unit
@@ -37,6 +37,27 @@ Transform:
   - {fileID: 5312941596765630447}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &416422852791182295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941343810408358010}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.51483727, y: 1.7939512, z: 0.7920633}
+  m_Center: {x: 0.013434857, y: 0.9043018, z: 0.10396835}
 --- !u!114 &3576954948691970861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,27 +86,6 @@ MonoBehaviour:
   _moveSpeed: 4
   _rotateSpeed: 4
   _maxMoveDistance: 4
---- !u!65 &416422852791182295
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941343810408358010}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.51483727, y: 1.7939512, z: 0.7920633}
-  m_Center: {x: 0.013434857, y: 0.9043018, z: 0.10396835}
 --- !u!114 &8450059876715164368
 MonoBehaviour:
   m_ObjectHideFlags: 0

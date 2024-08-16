@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class MoveAction : MonoBehaviour
+public class MoveAction : BaseAction
 {
-
     [SerializeField] private Animator _animator;
 
     [SerializeField] private float _moveSpeed = 4f;
@@ -16,13 +14,10 @@ public class MoveAction : MonoBehaviour
 
     private Vector3 _targetPosition;
     private float _stoppingDistance = 0.1f;
-    private bool _isActive = false;
 
-    private Unit _unit;
-
-    private void Awake()
+    protected override void Awake()
     {
-        _unit = GetComponent<Unit>();
+        base.Awake();
         _targetPosition = transform.position;
     }
 
@@ -94,7 +89,7 @@ public class MoveAction : MonoBehaviour
                     continue;
                 }
 
-                Debug.Log(testGridPosition);
+                //Debug.Log(testGridPosition);
                 validGridPositionList.Add(testGridPosition);
             }
         }
