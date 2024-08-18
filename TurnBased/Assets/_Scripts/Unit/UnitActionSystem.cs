@@ -39,7 +39,7 @@ public class UnitActionSystem : MonoBehaviour
             if (_selectedUnit.GetMoveAction().IsValidActionGridPosition(mouseGridPosition))
             {
                 SetBusy();
-                _selectedUnit.GetMoveAction().Move(mouseGridPosition);
+                _selectedUnit.GetMoveAction().Move(mouseGridPosition, ClearBusy);
             }
         }
 
