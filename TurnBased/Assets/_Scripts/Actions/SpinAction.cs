@@ -1,9 +1,16 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SpinAction : BaseAction
 {
     private float _totalSpinAmount;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        ActionName = "Spin";
+    }
 
     private void Update()
     {
@@ -26,5 +33,10 @@ public class SpinAction : BaseAction
         _isActive = true;
         _totalSpinAmount = 0f;
         Debug.Log("Spin activated");
+    }
+
+    public override string GetActionName()
+    {
+        return ActionName;
     }
 }

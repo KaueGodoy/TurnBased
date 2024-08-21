@@ -19,6 +19,7 @@ public class MoveAction : BaseAction
     protected override void Awake()
     {
         base.Awake();
+        ActionName = "Move";
         _targetPosition = transform.position;
     }
 
@@ -98,5 +99,10 @@ public class MoveAction : BaseAction
         }
 
         return validGridPositionList;
+    }
+
+    public override string GetActionName()
+    {
+        return ActionName;
     }
 }
