@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -23,11 +24,11 @@ public class SpinAction : BaseAction
         if (_totalSpinAmount >= 360f)
         {
             _isActive = false;
-            _onActionComplete();  
+            _onActionComplete();
         }
     }
 
-    public void Spin(Action _onActionComplete)
+    public override void TakeAction(GridPosition griPosition, Action _onActionComplete)
     {
         this._onActionComplete = _onActionComplete;
         _isActive = true;
@@ -38,5 +39,15 @@ public class SpinAction : BaseAction
     public override string GetActionName()
     {
         return ActionName;
+    }
+
+    public override List<GridPosition> GetValidActionGridPositionList()
+    {
+        GridPosition unitGridPosition = _unit.GetGridPosition();
+
+        return new List<GridPosition>
+        {
+            unitGridPosition
+        };
     }
 }
