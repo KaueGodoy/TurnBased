@@ -35,6 +35,8 @@ public class UnitActionSystem : MonoBehaviour
     {
         if (_isBusy) return;
 
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         if (TryToHandleUnitSelection()) return;
 
         HandleSelectedAction();
@@ -88,6 +90,11 @@ public class UnitActionSystem : MonoBehaviour
             {
                 if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit))
                 {
+                    if (unit == _selectedUnit)
+                    {
+                        return false;
+                    }
+
                     SetSelectedUnit(unit);
                     return true;
                 }
@@ -109,8 +116,13 @@ public class UnitActionSystem : MonoBehaviour
         _selectedAction = baseAction;
     }
 
-    public Unit GetSelecteUnit()
+    public Unit GetSelectedUnit()
     {
         return _selectedUnit;
+    }
+
+    public BaseAction GetSelectedAction()
+    {
+        return _selectedAction;
     }
 }

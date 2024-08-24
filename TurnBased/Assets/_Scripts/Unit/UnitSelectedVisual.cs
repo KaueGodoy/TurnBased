@@ -25,7 +25,7 @@ public class UnitSelectedVisual : MonoBehaviour
 
     private void UpdateVisual()
     {
-        if (UnitActionSystem.Instance.GetSelecteUnit() == _unit)
+        if (UnitActionSystem.Instance.GetSelectedUnit() == _unit)
         {
             Show();
         }

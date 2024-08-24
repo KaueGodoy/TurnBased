@@ -24,7 +24,7 @@ public class UnitActionSystemUI : MonoBehaviour
             Destroy(buttonTransform.gameObject);
         }
 
-        Unit selectedUnit = UnitActionSystem.Instance.GetSelecteUnit();
+        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
 
         foreach (BaseAction baseAction in selectedUnit.GetBaseActionArray())
         {
