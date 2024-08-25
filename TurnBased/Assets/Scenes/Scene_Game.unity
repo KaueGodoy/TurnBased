@@ -387,7 +387,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 60}
+  m_CellSize: {x: 120, y: 80}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 2
   m_ConstraintCount: 1
@@ -1133,11 +1133,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2697332629571106401, guid: 205165f8ec4d0b24389f828c756abf3d,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 23
-      objectReference: {fileID: 0}
     - target: {fileID: 3208122190598700405, guid: 205165f8ec4d0b24389f828c756abf3d,
         type: 3}
       propertyPath: m_Name
@@ -1699,11 +1694,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2697332629571106401, guid: 205165f8ec4d0b24389f828c756abf3d,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 23
-      objectReference: {fileID: 0}
     - target: {fileID: 3208122190598700405, guid: 205165f8ec4d0b24389f828c756abf3d,
         type: 3}
       propertyPath: m_Name
@@ -1827,11 +1817,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697332629571106401, guid: 205165f8ec4d0b24389f828c756abf3d,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 3208122190598700405, guid: 205165f8ec4d0b24389f828c756abf3d,
         type: 3}
@@ -1957,11 +1942,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2697332629571106401, guid: 205165f8ec4d0b24389f828c756abf3d,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 23
-      objectReference: {fileID: 0}
     - target: {fileID: 3208122190598700405, guid: 205165f8ec4d0b24389f828c756abf3d,
         type: 3}
       propertyPath: m_Name
@@ -2085,11 +2065,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697332629571106401, guid: 205165f8ec4d0b24389f828c756abf3d,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 3208122190598700405, guid: 205165f8ec4d0b24389f828c756abf3d,
         type: 3}
@@ -2353,7 +2328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 11.99999, z: -10}
+  m_FollowOffset: {x: 0, y: 12, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
