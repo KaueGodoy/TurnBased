@@ -8,6 +8,7 @@ public class UnitActionSystem : MonoBehaviour
 
     public event EventHandler OnSelectedUnitChanged;
     public event EventHandler OnSelectedActionChanged;
+    public event EventHandler<bool> OnBusyChanged;
 
     [SerializeField] private Unit _selectedUnit;
     [SerializeField] private LayerMask _unitLayerMask;
@@ -75,11 +76,13 @@ public class UnitActionSystem : MonoBehaviour
     private void SetBusy()
     {
         _isBusy = true;
+        OnBusyChanged?.Invoke(this, _isBusy);
     }
 
     private void ClearBusy()
     {
         _isBusy = false;
+        OnBusyChanged?.Invoke(this, _isBusy);
     }
 
     private bool TryToHandleUnitSelection()
