@@ -8,10 +8,13 @@ public class Unit : MonoBehaviour
     private SpinAction _spinAction;
     private BaseAction[] _baseActionArray;
 
+    [SerializeField] private int _actionPoints = 2;
+    public int ActionPoints { get { return _actionPoints; } set { _actionPoints = value; } }
+
     private void Awake()
     {
         _moveAction = GetComponent<MoveAction>();
-        _spinAction= GetComponent<SpinAction>();
+        _spinAction = GetComponent<SpinAction>();
         _baseActionArray = GetComponents<BaseAction>();
     }
 
@@ -50,5 +53,35 @@ public class Unit : MonoBehaviour
     public BaseAction[] GetBaseActionArray()
     {
         return _baseActionArray;
+    }
+
+    public bool TrySpendActionPointsToTakeAction(BaseAction baseAction)
+    {
+        if (CanSpendActionPointsToTakeAction(baseAction))
+        {
+            SpendActionPoints(baseAction.GetActionPointsCost());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CanSpendActionPointsToTakeAction(BaseAction baseAction)
+    {
+        if (ActionPoints >= baseAction.GetActionPointsCost())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void SpendActionPoints(int amount)
+    {
+        ActionPoints -= amount;
     }
 }
