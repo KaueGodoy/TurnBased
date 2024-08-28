@@ -84,4 +84,9 @@ public class Unit : MonoBehaviour
     {
         ActionPoints -= amount;
     }
+
+    public int GetActionPoints()
+    {
+        return ActionPoints;
+    }
 }

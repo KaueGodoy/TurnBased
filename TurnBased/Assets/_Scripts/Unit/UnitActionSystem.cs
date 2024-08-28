@@ -9,6 +9,7 @@ public class UnitActionSystem : MonoBehaviour
     public event EventHandler OnSelectedUnitChanged;
     public event EventHandler OnSelectedActionChanged;
     public event EventHandler<bool> OnBusyChanged;
+    public event EventHandler OnActionStarted;
 
     [SerializeField] private Unit _selectedUnit;
     [SerializeField] private LayerMask _unitLayerMask;
@@ -55,7 +56,7 @@ public class UnitActionSystem : MonoBehaviour
 
             SetBusy();
             _selectedAction.TakeAction(mouseGridPosition, ClearBusy);
-
+            OnActionStarted?.Invoke(this, EventArgs.Empty);
 
             //switch (_selectedAction)
             //{
