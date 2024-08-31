@@ -11,10 +11,12 @@ public class Unit : MonoBehaviour
     private SpinAction _spinAction;
     private BaseAction[] _baseActionArray;
 
+    [SerializeField] private bool _isEnemy = false;
     [SerializeField] private int _maxActionPoints = 2;
     [SerializeField] private int _actionPoints = 2;
     public int ActionPoints { get { return _actionPoints; } set { _actionPoints = value; } }
     public int MaxActionPoints { get { return _maxActionPoints; } set { _maxActionPoints = value; } }
+    public bool IsEnemy { get { return _isEnemy; } set { _isEnemy = value; } }
 
     private void Awake()
     {
@@ -97,13 +99,21 @@ public class Unit : MonoBehaviour
 
     private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
     {
-        ActionPoints = MaxActionPoints;
-
-        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        if ((IsEnemy && !TurnSystem.Instance.IsPlayerTurn) ||
+            (!IsEnemy && TurnSystem.Instance.IsPlayerTurn))
+        {
+            ActionPoints = MaxActionPoints;
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public int GetActionPoints()
     {
         return ActionPoints;
+    }
+
+    public bool IsUnitEnemy()
+    {
+        return _isEnemy;
     }
 }

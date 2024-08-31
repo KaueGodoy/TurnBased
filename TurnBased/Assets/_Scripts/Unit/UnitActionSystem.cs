@@ -38,6 +38,8 @@ public class UnitActionSystem : MonoBehaviour
     {
         if (_isBusy) return;
 
+        if (!TurnSystem.Instance.IsPlayerTurn) return;
+
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         if (TryToHandleUnitSelection()) return;
@@ -97,6 +99,11 @@ public class UnitActionSystem : MonoBehaviour
                 if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit))
                 {
                     if (unit == _selectedUnit)
+                    {
+                        return false;
+                    }
+
+                    if (unit.IsEnemy)
                     {
                         return false;
                     }

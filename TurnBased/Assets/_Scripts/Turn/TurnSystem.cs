@@ -8,7 +8,9 @@ public class TurnSystem : MonoBehaviour
     public event EventHandler OnTurnChanged;
 
     [SerializeField] private int _turnNumber = 1;
+    [SerializeField] private bool _isPlayerTurn = true;
     public int TurnNumber {  get { return _turnNumber; } set { _turnNumber = value; } }   
+    public bool IsPlayerTurn {  get { return _isPlayerTurn; } set { _isPlayerTurn = value; } }   
 
     private void Awake()
     {
@@ -25,11 +27,17 @@ public class TurnSystem : MonoBehaviour
     public void NextTurn()
     {
         TurnNumber++;
+        IsPlayerTurn = !IsPlayerTurn;
         OnTurnChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public int GetTurnNumber()
     {
         return _turnNumber;
+    }
+
+    public bool IsPlayerTurnNow()
+    {
+        return _isPlayerTurn;
     }
 }

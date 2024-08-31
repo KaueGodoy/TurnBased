@@ -77,7 +77,7 @@ public class UnitActionSystemUI : MonoBehaviour
             actionButtonUI.SetBaseActionText(baseAction);
 
             _actionButtonList.Add(actionButtonUI);
-            Debug.Log(_actionButtonList);
+            //Debug.Log(_actionButtonList);
         }
     }
 
