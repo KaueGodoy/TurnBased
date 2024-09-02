@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 9219252783445032461}
   - component: {fileID: 4242981460492874470}
   - component: {fileID: 6186717201846366103}
+  - component: {fileID: 5932997251902618707}
   m_Layer: 7
   m_Name: Unit_Furina
   m_TagString: Untagged
@@ -167,6 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3aa2de8f881d8b4b87ac8a66ca5b981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isEnemy: 0
+  _maxActionPoints: 2
+  _actionPoints: 2
 --- !u!114 &4242981460492874470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +199,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ec1b915fad7ea498f5cba42c16ba7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5932997251902618707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932545763670385880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651d062e90a4aea45b309fc6a7c4b548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxShootRange: 4
 --- !u!1001 &2466873754219884464
 PrefabInstance:
   m_ObjectHideFlags: 0
