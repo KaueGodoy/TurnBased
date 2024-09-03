@@ -6,7 +6,21 @@ public class ShootAction : BaseAction
 {
     [SerializeField] private int _maxShootRange = 4;
 
-    private float _totalSpinAmount;
+    [Header("Shooting Timers")]
+    [SerializeField] private float _aimingStateTime = 1;
+    [SerializeField] private float _shootingStateTime = .1f;
+    [SerializeField] private float _coolOffStateTime = .5f;
+
+    [SerializeField] private float _stateTimer;
+
+    private enum State
+    {
+        Aiming,
+        Shooting,
+        Cooloff
+    }
+
+    private State _currentState;
 
     protected override void Awake()
     {
@@ -18,15 +32,44 @@ public class ShootAction : BaseAction
     {
         if (!_isActive) return;
 
-        float spinAddAmount = 360f * Time.deltaTime;
-        transform.eulerAngles += new Vector3(0, spinAddAmount, 0);
+        _stateTimer -= Time.deltaTime;
 
-        _totalSpinAmount += spinAddAmount;
-        if (_totalSpinAmount >= 360f)
+        switch (_currentState)
         {
-            _isActive = false;
-            _onActionComplete();
+            case State.Aiming:
+                break;
+            case State.Shooting:
+                break;
+            case State.Cooloff:
+                break;
         }
+
+        if (_stateTimer <= 0f)
+        {
+            NextState();
+        }
+
+    }
+
+    private void NextState()
+    {
+        switch (_currentState)
+        {
+            case State.Aiming:
+                _currentState = State.Shooting;
+                _stateTimer = _shootingStateTime;
+                break;
+            case State.Shooting:
+                _currentState = State.Cooloff;
+                _stateTimer = _coolOffStateTime;
+                break;
+            case State.Cooloff:
+                _isActive = false;
+                _onActionComplete();
+                break;
+        }
+
+        Debug.Log(_currentState);
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()
@@ -45,6 +88,12 @@ public class ShootAction : BaseAction
                 if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
                 {
                     // grid position with x and z >= 0 and within width and height
+                    continue;
+                }
+
+                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+                if (testDistance > _maxShootRange)
+                {
                     continue;
                 }
 
@@ -74,8 +123,10 @@ public class ShootAction : BaseAction
     {
         this._onActionComplete = onActionComplete;
         _isActive = true;
-        _totalSpinAmount = 0f;
-        Debug.Log("Spin activated");
+        Debug.Log("Aiming");
+
+        _currentState = State.Aiming;
+        _stateTimer = _aimingStateTime;
     }
 
     public override string GetActionName()
