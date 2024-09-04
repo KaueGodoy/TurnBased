@@ -45,6 +45,11 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void Damage()
+    {
+        Debug.Log(transform.position + "damaged!");
+    }
+
     public MoveAction GetMoveAction()
     {
         return _moveAction;
@@ -58,6 +63,11 @@ public class Unit : MonoBehaviour
     public GridPosition GetGridPosition()
     {
         return _gridPosition;
+    }
+
+    public Vector3 GetWorldPosition()
+    {
+        return transform.position;
     }
 
     public BaseAction[] GetBaseActionArray()

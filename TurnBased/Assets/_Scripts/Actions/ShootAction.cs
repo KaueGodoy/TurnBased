@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ShootAction : BaseAction
 {
@@ -12,6 +13,10 @@ public class ShootAction : BaseAction
     [SerializeField] private float _coolOffStateTime = .5f;
 
     [SerializeField] private float _stateTimer;
+
+
+    private Unit _targetUnit;
+    private bool _canShootBullet;
 
     private enum State
     {
@@ -37,8 +42,16 @@ public class ShootAction : BaseAction
         switch (_currentState)
         {
             case State.Aiming:
+                Vector3 aimingDirection = (_targetUnit.GetWorldPosition() - _unit.GetWorldPosition()).normalized;
+                float rotateSpeed = 10f;
+                transform.forward = Vector3.Lerp(transform.forward, aimingDirection, rotateSpeed * Time.deltaTime);
                 break;
             case State.Shooting:
+                if (_canShootBullet)
+                {
+                    Shoot();
+                    _canShootBullet = false;
+                }
                 break;
             case State.Cooloff:
                 break;
@@ -49,6 +62,11 @@ public class ShootAction : BaseAction
             NextState();
         }
 
+    }
+
+    private void Shoot()
+    {
+        _targetUnit.Damage();
     }
 
     private void NextState()
@@ -64,12 +82,11 @@ public class ShootAction : BaseAction
                 _stateTimer = _coolOffStateTime;
                 break;
             case State.Cooloff:
-                _isActive = false;
-                _onActionComplete();
+                ActionComplete();
                 break;
         }
 
-        Debug.Log(_currentState);
+        //Debug.Log(_currentState);
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()
@@ -121,12 +138,15 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        this._onActionComplete = onActionComplete;
-        _isActive = true;
-        Debug.Log("Aiming");
+        ActionStart(onActionComplete);
+
+        _targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+        //Debug.Log("Aiming");
 
         _currentState = State.Aiming;
         _stateTimer = _aimingStateTime;
+
+        _canShootBullet = true;
     }
 
     public override string GetActionName()
