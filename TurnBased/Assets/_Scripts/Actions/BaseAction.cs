@@ -17,6 +17,7 @@ public abstract class BaseAction : MonoBehaviour
     {
         _unit = GetComponent<Unit>();
     }
+
     public virtual bool IsValidActionGridPosition(GridPosition gridPosition)
     {
         List<GridPosition> validGridPositionList = GetValidActionGridPositionList();

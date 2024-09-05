@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class ShootAction : BaseAction
 {
+    public event EventHandler OnShoot;
+
     [SerializeField] private int _maxShootRange = 4;
 
     [Header("Shooting Timers")]
@@ -66,6 +68,7 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
+        OnShoot?.Invoke(this, EventArgs.Empty);
         _targetUnit.Damage();
     }
 

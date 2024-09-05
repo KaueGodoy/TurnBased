@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 4242981460492874470}
   - component: {fileID: 6186717201846366103}
   - component: {fileID: 5932997251902618707}
+  - component: {fileID: 527888610162221747}
   m_Layer: 7
   m_Name: Unit_Furina
   m_TagString: Untagged
@@ -183,7 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7962e4f18d78fb44aa7bff2c20271afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 6381144565537391766}
   _moveSpeed: 4
   _rotateSpeed: 4
   _maxMoveDistance: 4
@@ -212,6 +212,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxShootRange: 4
+  _aimingStateTime: 1
+  _shootingStateTime: 0.1
+  _coolOffStateTime: 0.5
+  _stateTimer: 0
+--- !u!114 &527888610162221747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932545763670385880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18539a99896c6cc4892af80abb1c25fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6381144565537391766}
 --- !u!1001 &2466873754219884464
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MoveAction : BaseAction
 {
-    [SerializeField] private Animator _animator;
-
     [SerializeField] private float _moveSpeed = 4f;
     [SerializeField] private float _rotateSpeed = 4f;
     [SerializeField] private int _maxMoveDistance = 4;
+
+    public event EventHandler OnStartMoving;
+    public event EventHandler OnStopMoving;
 
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
     public float RotateSpeed { get { return _rotateSpeed; } set { _rotateSpeed = value; } }
@@ -37,11 +38,10 @@ public class MoveAction : BaseAction
         if (Vector3.Distance(transform.position, _targetPosition) > _stoppingDistance)
         {
             transform.position += moveDirection * MoveSpeed * Time.deltaTime;
-            _animator.SetBool("IsWalking", true);
         }
         else
         {
-            _animator.SetBool("IsWalking", false);
+            OnStopMoving?.Invoke(this, EventArgs.Empty);
             ActionComplete();
         }
 
@@ -52,6 +52,8 @@ public class MoveAction : BaseAction
     {
         ActionStart(onActionComplete);
         this._targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()
