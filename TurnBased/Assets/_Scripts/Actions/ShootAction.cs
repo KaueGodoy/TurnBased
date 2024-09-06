@@ -5,7 +5,12 @@ using UnityEngine.EventSystems;
 
 public class ShootAction : BaseAction
 {
-    public event EventHandler OnShoot;
+    public event EventHandler<OnShootEventArgs> OnShoot;
+    public class OnShootEventArgs : EventArgs
+    {
+        public Unit TargetUnit { get; set; }
+        public Unit ShootingUnit { get; set; }
+    }
 
     [SerializeField] private int _maxShootRange = 4;
 
@@ -68,7 +73,12 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
-        OnShoot?.Invoke(this, EventArgs.Empty);
+        OnShoot?.Invoke(this, new OnShootEventArgs
+        {
+            TargetUnit = _targetUnit,
+            ShootingUnit = _unit
+        });
+
         _targetUnit.Damage();
     }
 

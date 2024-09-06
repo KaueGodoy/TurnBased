@@ -132,6 +132,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 4073270499393668858}
+  _bulletProjectilePrefab: {fileID: 720620818256485871, guid: e9b6baca8bd739a48a683528a62d7ce5,
+    type: 3}
+  _shootPointTransform: {fileID: 3101325548510680008}
 --- !u!1 &8032687005301989299
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +335,12 @@ PrefabInstance:
 --- !u!4 &894412157099599602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4620998167008108, guid: c25ac4fdc903e7d49a7520930673ecd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 899028720914199966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3101325548510680008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2842865363423880790, guid: c25ac4fdc903e7d49a7520930673ecd6,
     type: 3}
   m_PrefabInstance: {fileID: 899028720914199966}
   m_PrefabAsset: {fileID: 0}
