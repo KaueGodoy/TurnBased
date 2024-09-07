@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13cff16dd0ac0e47aeb26ff4a5c7a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trailRenderer: {fileID: 3555886869260701820}
+  _bulletExplosionParticlePrefab: {fileID: 8725598189923885896, guid: 579fa8156403d574c9141606f2e8a490,
+    type: 3}
 --- !u!1 &461119279179532084
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,6 +190,6 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.01
   m_MaskInteraction: 0
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
