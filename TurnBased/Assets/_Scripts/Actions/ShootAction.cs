@@ -20,7 +20,9 @@ public class ShootAction : BaseAction
     [SerializeField] private float _coolOffStateTime = .5f;
 
     [SerializeField] private float _stateTimer;
-
+    [Header("Damage")]
+    [SerializeField] private int _damage = 60;
+    public int Damage { get { return _damage; } set { _damage = value; } }
 
     private Unit _targetUnit;
     private bool _canShootBullet;
@@ -79,7 +81,7 @@ public class ShootAction : BaseAction
             ShootingUnit = _unit
         });
 
-        _targetUnit.Damage();
+        _targetUnit.TakeDamage(Damage);
     }
 
     private void NextState()

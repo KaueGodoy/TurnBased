@@ -15,7 +15,6 @@ public class UnitSelectedVisual : MonoBehaviour
     {
         UnitActionSystem.Instance.OnSelectedUnitChanged += UnitActionSystem_OnSelectedUnitChanged;
         UpdateVisual();
-
     }
 
     private void UnitActionSystem_OnSelectedUnitChanged(object sender, System.EventArgs e)
@@ -42,5 +41,10 @@ public class UnitSelectedVisual : MonoBehaviour
     private void Hide()
     {
         _meshRenderer.enabled = false;
+    }
+
+    private void OnDestroy()
+    {
+        UnitActionSystem.Instance.OnSelectedUnitChanged -= UnitActionSystem_OnSelectedUnitChanged;
     }
 }

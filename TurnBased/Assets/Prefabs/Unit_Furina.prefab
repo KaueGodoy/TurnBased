@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 6186717201846366103}
   - component: {fileID: 5932997251902618707}
   - component: {fileID: 527888610162221747}
+  - component: {fileID: 1581697370138526996}
   m_Layer: 7
   m_Name: Unit_Furina
   m_TagString: Untagged
@@ -216,6 +217,7 @@ MonoBehaviour:
   _shootingStateTime: 0.1
   _coolOffStateTime: 0.5
   _stateTimer: 0
+  _damage: 60
 --- !u!114 &527888610162221747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +234,19 @@ MonoBehaviour:
   _bulletProjectilePrefab: {fileID: 720620818256485871, guid: e9b6baca8bd739a48a683528a62d7ce5,
     type: 3}
   _shootPointTransform: {fileID: 6203341227728116795}
+--- !u!114 &1581697370138526996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932545763670385880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0899d6f4409ef0c42bd13a4638d3eb35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: 100
 --- !u!1001 &2466873754219884464
 PrefabInstance:
   m_ObjectHideFlags: 0
