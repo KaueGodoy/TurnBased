@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 5932997251902618707}
   - component: {fileID: 527888610162221747}
   - component: {fileID: 1581697370138526996}
+  - component: {fileID: -7863158429911635672}
   m_Layer: 7
   m_Name: Unit_Furina
   m_TagString: Untagged
@@ -247,6 +248,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHealth: 100
+--- !u!114 &-7863158429911635672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932545763670385880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d83bcd16462cc34bbdeece40611e018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ragdollPrefab: {fileID: 9112395036759098963, guid: 1213f5a7820efe24388ddd1046f2a00a,
+    type: 3}
 --- !u!1001 &2466873754219884464
 PrefabInstance:
   m_ObjectHideFlags: 0

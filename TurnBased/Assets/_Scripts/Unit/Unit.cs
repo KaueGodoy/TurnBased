@@ -59,6 +59,7 @@ public class Unit : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         _healthSystem.TakeDamage(damageAmount);
+        Debug.Log(damageAmount);
     }
 
     public MoveAction GetMoveAction()
