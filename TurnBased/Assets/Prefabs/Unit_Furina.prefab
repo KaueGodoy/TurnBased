@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ragdollPrefab: {fileID: 9112395036759098963, guid: 1213f5a7820efe24388ddd1046f2a00a,
     type: 3}
+  _originalRootBone: {fileID: 6414943033700391109}
 --- !u!1001 &2466873754219884464
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1592,6 +1593,12 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &6414943033700391109 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8879528566716807029, guid: 7d776eb3eca5fc94e8cc4e04d11dd476,
+    type: 3}
+  m_PrefabInstance: {fileID: 2466873754219884464}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8171028387261938285
 PrefabInstance:
   m_ObjectHideFlags: 0
