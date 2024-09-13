@@ -29,9 +29,9 @@ public class SpinAction : BaseAction
 
     public override void TakeAction(GridPosition griPosition, Action onActionComplete)
     {
-        ActionStart(onActionComplete);
         _totalSpinAmount = 0f;
         Debug.Log("Spin activated");
+        ActionStart(onActionComplete);
     }
 
     public override string GetActionName()

@@ -153,7 +153,6 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        ActionStart(onActionComplete);
 
         _targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
         //Debug.Log("Aiming");
@@ -162,6 +161,8 @@ public class ShootAction : BaseAction
         _stateTimer = _aimingStateTime;
 
         _canShootBullet = true;
+
+        ActionStart(onActionComplete);
     }
 
     public override string GetActionName()
