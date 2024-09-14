@@ -18,6 +18,22 @@ public class CameraManager : MonoBehaviour
         switch (sender)
         {
             case ShootAction shootAction:
+                Unit shooterUnit = shootAction.GetUnit();
+                Unit targetUnit = shootAction.GetTargetUnit();
+
+                Vector3 cameraCharacterHeight = Vector3.up * 1.5f;
+                Vector3 shootDirection = (targetUnit.GetWorldPosition() - shooterUnit.GetWorldPosition()).normalized;
+
+                float shoulderOffsetAmount = .5f;
+                Vector3 shoulderOffset = Quaternion.Euler(0, 90, 0) * shootDirection * shoulderOffsetAmount;
+
+                Vector3 actionCameraPosition =
+                    shooterUnit.GetWorldPosition() + cameraCharacterHeight + shoulderOffset + (shootDirection * -1);
+                Vector3 actionCameraRotation = targetUnit.GetWorldPosition() + cameraCharacterHeight;
+
+                _actionCameraGameObj.transform.position = actionCameraPosition;
+                _actionCameraGameObj.transform.LookAt(actionCameraRotation);
+
                 ShowActionCamera();
                 break;
         }
@@ -28,18 +44,18 @@ public class CameraManager : MonoBehaviour
         switch (sender)
         {
             case ShootAction shootAction:
-                HideActionCamera(); 
+                HideActionCamera();
                 break;
         }
     }
 
     private void ShowActionCamera()
     {
-        _actionCameraGameObj.SetActive(true);   
+        _actionCameraGameObj.SetActive(true);
     }
 
     private void HideActionCamera()
     {
-        _actionCameraGameObj.SetActive(false);  
+        _actionCameraGameObj.SetActive(false);
     }
 }

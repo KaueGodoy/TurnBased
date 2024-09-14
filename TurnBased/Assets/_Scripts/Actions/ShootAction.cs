@@ -169,4 +169,9 @@ public class ShootAction : BaseAction
     {
         return ActionName;
     }
+
+    public Unit GetTargetUnit()
+    {
+        return _targetUnit;
+    }
 }

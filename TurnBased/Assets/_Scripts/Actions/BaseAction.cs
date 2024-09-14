@@ -49,4 +49,9 @@ public abstract class BaseAction : MonoBehaviour
 
         OnAnyActionCompleted?.Invoke(this, EventArgs.Empty);
     }
+
+    public Unit GetUnit()
+    {
+        return _unit;   
+    }
 }
