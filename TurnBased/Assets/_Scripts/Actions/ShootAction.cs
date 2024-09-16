@@ -13,6 +13,8 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private int _maxShootRange = 4;
+    public int MaxShootRange { get { return _maxShootRange; } set { _maxShootRange = value; } }
+
 
     [Header("Shooting Timers")]
     [SerializeField] private float _aimingStateTime = 1;
@@ -110,9 +112,9 @@ public class ShootAction : BaseAction
 
         GridPosition unitGridPosition = _unit.GetGridPosition();
 
-        for (int x = -_maxShootRange; x <= _maxShootRange; x++)
+        for (int x = -MaxShootRange; x <= MaxShootRange; x++)
         {
-            for (int z = -_maxShootRange; z <= _maxShootRange; z++)
+            for (int z = -MaxShootRange; z <= MaxShootRange; z++)
             {
                 GridPosition offsetGridPosition = new GridPosition(x, z);
                 GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
@@ -124,7 +126,7 @@ public class ShootAction : BaseAction
                 }
 
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
-                if (testDistance > _maxShootRange)
+                if (testDistance > MaxShootRange)
                 {
                     continue;
                 }
