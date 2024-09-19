@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
 
     private HealthSystem _healthSystem;
     private MoveAction _moveAction;
+    private ShootAction _shootAction;
     private SpinAction _spinAction;
     private BaseAction[] _baseActionArray;
 
@@ -25,6 +26,7 @@ public class Unit : MonoBehaviour
     {
         _healthSystem = GetComponent<HealthSystem>();   
         _moveAction = GetComponent<MoveAction>();
+        _shootAction = GetComponent<ShootAction>();
         _spinAction = GetComponent<SpinAction>();
         _baseActionArray = GetComponents<BaseAction>();
     }
@@ -145,5 +147,15 @@ public class Unit : MonoBehaviour
     public bool IsUnitEnemy()
     {
         return _isEnemy;
+    }
+
+    public ShootAction GetShootAction()
+    {
+        return _shootAction;
+    }
+
+    public float GetHealthNormalized()
+    {
+        return _healthSystem.GetHealthNormalized();
     }
 }

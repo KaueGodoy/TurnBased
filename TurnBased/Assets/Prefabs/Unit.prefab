@@ -213,7 +213,7 @@ MonoBehaviour:
   _shootingStateTime: 0.1
   _coolOffStateTime: 0.5
   _stateTimer: 0
-  _damage: 60
+  _damage: 30
 --- !u!114 &5890633890912755155
 MonoBehaviour:
   m_ObjectHideFlags: 0
