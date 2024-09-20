@@ -10,9 +10,6 @@ public class Unit : MonoBehaviour
     private GridPosition _gridPosition;
 
     private HealthSystem _healthSystem;
-    private MoveAction _moveAction;
-    private ShootAction _shootAction;
-    private SpinAction _spinAction;
     private BaseAction[] _baseActionArray;
 
     [SerializeField] private bool _isEnemy = false;
@@ -24,10 +21,7 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
-        _healthSystem = GetComponent<HealthSystem>();   
-        _moveAction = GetComponent<MoveAction>();
-        _shootAction = GetComponent<ShootAction>();
-        _spinAction = GetComponent<SpinAction>();
+        _healthSystem = GetComponent<HealthSystem>();
         _baseActionArray = GetComponents<BaseAction>();
     }
 
@@ -72,14 +66,16 @@ public class Unit : MonoBehaviour
         Debug.Log(damageAmount);
     }
 
-    public MoveAction GetMoveAction()
+    public T GetAction<T>() where T : BaseAction
     {
-        return _moveAction;
-    }
-
-    public SpinAction GetSpinAction()
-    {
-        return _spinAction;
+        foreach (BaseAction baseAction in _baseActionArray)
+        {
+            if (baseAction is T)
+            {
+                return (T)baseAction;
+            }
+        }
+        return null;
     }
 
     public GridPosition GetGridPosition()
@@ -147,11 +143,6 @@ public class Unit : MonoBehaviour
     public bool IsUnitEnemy()
     {
         return _isEnemy;
-    }
-
-    public ShootAction GetShootAction()
-    {
-        return _shootAction;
     }
 
     public float GetHealthNormalized()
