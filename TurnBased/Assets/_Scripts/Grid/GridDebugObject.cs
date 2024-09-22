@@ -9,7 +9,7 @@ public class GridDebugObject : MonoBehaviour
 
     private void Update()
     {
-        _text.text = _gridObject.ToString();
+        //_text.text = _gridObject.ToString();
     }
 
     public void SetGridObject(GridObject gridObject)
