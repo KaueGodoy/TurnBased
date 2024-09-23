@@ -2,9 +2,9 @@ public class PathNode
 {
     private GridPosition _gridPosition;
 
-    private int _gCost;
-    private int _hCost;
-    private int _fCost;
+    public int GCost { get; set; }
+    public int HCost { get; set; }
+    public int FCost { get; set; }
     
     private PathNode _cameFromPathNode;
 
