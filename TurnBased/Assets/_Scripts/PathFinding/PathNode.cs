@@ -17,4 +17,14 @@ public class PathNode
     {
         return _gridPosition.ToString();
     }
+
+    public void CalculateFCost()
+    {
+        FCost = GCost + HCost;
+    }
+
+    public void ResetCameFromPathNode()
+    {
+        _cameFromPathNode = null;
+    }
 }
