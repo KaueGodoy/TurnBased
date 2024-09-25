@@ -27,4 +27,9 @@ public class PathNode
     {
         _cameFromPathNode = null;
     }
+
+    public GridPosition GetGridPosition()
+    {
+        return _gridPosition;
+    }
 }

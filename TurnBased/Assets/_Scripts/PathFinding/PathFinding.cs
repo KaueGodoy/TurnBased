@@ -58,6 +58,11 @@ public class PathFinding : MonoBehaviour
                 // Reached final node
                 return CalculatePath(endNode);
             }
+
+            openList.Remove(currentNode);
+            closedList.Add(currentNode);
+
+
         }
     }
 
@@ -66,6 +71,69 @@ public class PathFinding : MonoBehaviour
         GridPosition gridPositionDistance = gridPositionA - gridPositionB;
         int distance = Mathf.Abs(gridPositionDistance.x) + Mathf.Abs(gridPositionDistance.z);
         return distance * MoveStraightCost;
+    }
+
+    private PathNode GetNode(int x, int z)
+    {
+        return _gridSystem.GetGridObject(new GridPosition(x, z));
+    }
+
+    private List<PathNode> GetNeighbourList(PathNode currentNode)
+    {
+        List<PathNode> neighbourList = new List<PathNode>();
+
+        GridPosition gridPosition = currentNode.GetGridPosition();
+
+        if (gridPosition.x - 1 >= 0)
+        {
+            // Left
+            neighbourList.Add(GetNode(gridPosition.x - 1, gridPosition.z + 0));
+
+            if (gridPosition.z - 1 >= 0)
+            {
+                // Left Down
+                neighbourList.Add(GetNode(gridPosition.x - 1, gridPosition.z - 1));
+            }
+
+            if (gridPosition.z + 1 < _gridSystem.GetHeight())
+            {
+                // Left Up
+                neighbourList.Add(GetNode(gridPosition.x - 1, gridPosition.z + 1));
+            }
+        }
+
+
+        if (gridPosition.x + 1 < _gridSystem.GetWidth())
+        {
+            // Right
+            neighbourList.Add(GetNode(gridPosition.x + 1, gridPosition.z + 0));
+
+            if (gridPosition.z - 1 >= 0)
+            {
+                // Right Down
+                neighbourList.Add(GetNode(gridPosition.x + 1, gridPosition.z - 1));
+            }
+
+            if (gridPosition.z + 1 < _gridSystem.GetHeight())
+            {
+                // Right Up
+                neighbourList.Add(GetNode(gridPosition.x + 1, gridPosition.z + 1));
+            }
+        }
+
+        if (gridPosition.z - 1 >= 0)
+        {
+            // Down
+            neighbourList.Add(GetNode(gridPosition.x + 0, gridPosition.z - 1));
+        }
+
+        if (gridPosition.z + 1 < _gridSystem.GetHeight())
+        {
+            // Up
+            neighbourList.Add(GetNode(gridPosition.x + 0, gridPosition.z + 1));
+        }
+
+        return neighbourList;
     }
 
     private PathNode GetLowestFCostPathNode(List<PathNode> pathNodeList)
