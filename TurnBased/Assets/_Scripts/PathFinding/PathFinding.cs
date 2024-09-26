@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PathFinding : MonoBehaviour
 {
+    public static PathFinding Instance { get; private set; }
+
     [SerializeField] private Transform _gridDebugPrefab;
 
     private const int MoveStraightCost = 10;
@@ -15,6 +17,15 @@ public class PathFinding : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Debug.LogError("Instance already exists" + transform + " - " + Instance);
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         _gridSystem = new GridSystem<PathNode>(10, 10, 2f,
             (GridSystem<PathNode> g, GridPosition gridPosition) => new PathNode(gridPosition));
         _gridSystem.CreateDebugObjects(_gridDebugPrefab);
@@ -62,15 +73,69 @@ public class PathFinding : MonoBehaviour
             openList.Remove(currentNode);
             closedList.Add(currentNode);
 
+            foreach (PathNode neighbourNode in GetNeighbourList(currentNode))
+            {
+                if (closedList.Contains(neighbourNode))
+                {
+                    continue;
+                }
 
+                int tentativeGCost =
+                    currentNode.GCost + CalculateDistance(currentNode.GetGridPosition(), neighbourNode.GetGridPosition());
+
+                if (tentativeGCost < neighbourNode.GCost)
+                {
+                    neighbourNode.SetCameFromPathNode(currentNode);
+                    neighbourNode.GCost = tentativeGCost;
+                    neighbourNode.HCost = CalculateDistance(neighbourNode.GetGridPosition(), endGridPosition);
+                    neighbourNode.CalculateFCost();
+
+                    if (!openList.Contains(neighbourNode))
+                    {
+                        openList.Add(neighbourNode);
+                    }
+                }
+
+
+            }
         }
+
+        // No path found
+        return null;
+    }
+
+    private List<GridPosition> CalculatePath(PathNode endNode)
+    {
+        List<PathNode> pathNodeList = new List<PathNode>();
+        pathNodeList.Add(endNode);
+
+        PathNode currentNode = endNode;
+
+        while (currentNode.GetCameFromPathNode() != null)
+        {
+            pathNodeList.Add(currentNode.GetCameFromPathNode());
+            currentNode = currentNode.GetCameFromPathNode();
+        }
+
+        pathNodeList.Reverse();
+
+        List<GridPosition> gridPositionList = new List<GridPosition>();
+        foreach (PathNode pathNode in pathNodeList)
+        {
+            gridPositionList.Add(pathNode.GetGridPosition());
+        }
+
+        return gridPositionList;
     }
 
     public int CalculateDistance(GridPosition gridPositionA, GridPosition gridPositionB)
     {
         GridPosition gridPositionDistance = gridPositionA - gridPositionB;
-        int distance = Mathf.Abs(gridPositionDistance.x) + Mathf.Abs(gridPositionDistance.z);
-        return distance * MoveStraightCost;
+        int xDistance = Mathf.Abs(gridPositionDistance.x);
+        int zDistance = Mathf.Abs(gridPositionDistance.z);
+        int remaining = Mathf.Abs(xDistance - zDistance);
+
+        return MoveDiagonalCost * Mathf.Min(xDistance, zDistance) + MoveStraightCost * remaining;
     }
 
     private PathNode GetNode(int x, int z)

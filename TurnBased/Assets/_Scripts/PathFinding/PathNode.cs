@@ -5,7 +5,7 @@ public class PathNode
     public int GCost { get; set; }
     public int HCost { get; set; }
     public int FCost { get; set; }
-    
+
     private PathNode _cameFromPathNode;
 
     public PathNode(GridPosition gridPosition)
@@ -26,6 +26,16 @@ public class PathNode
     public void ResetCameFromPathNode()
     {
         _cameFromPathNode = null;
+    }
+
+    public void SetCameFromPathNode(PathNode pathNode)
+    {
+        _cameFromPathNode = pathNode;
+    }
+
+    public PathNode GetCameFromPathNode()
+    {
+        return _cameFromPathNode;
     }
 
     public GridPosition GetGridPosition()
