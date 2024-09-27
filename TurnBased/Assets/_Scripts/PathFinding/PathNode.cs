@@ -6,6 +6,10 @@ public class PathNode
     public int HCost { get; set; }
     public int FCost { get; set; }
 
+    private bool _isWalkable = true;
+    public bool IsWalkable { get { return _isWalkable; } set { _isWalkable = value; } }
+
+
     private PathNode _cameFromPathNode;
 
     public PathNode(GridPosition gridPosition)
