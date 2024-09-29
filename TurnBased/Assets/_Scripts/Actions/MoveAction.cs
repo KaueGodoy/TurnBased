@@ -14,14 +14,15 @@ public class MoveAction : BaseAction
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
     public float RotateSpeed { get { return _rotateSpeed; } set { _rotateSpeed = value; } }
 
-    private Vector3 _targetPosition;
+    private List<Vector3> _positionList;
+    private int _currentPositionIndex;
+
     private float _stoppingDistance = 0.1f;
 
     protected override void Awake()
     {
         base.Awake();
         ActionName = "Move";
-        _targetPosition = transform.position;
     }
 
     private void Update()
@@ -33,24 +34,38 @@ public class MoveAction : BaseAction
     {
         if (!_isActive) return;
 
-        Vector3 moveDirection = (_targetPosition - transform.position).normalized;
+        Vector3 targetPosition = _positionList[_currentPositionIndex];
+        Vector3 moveDirection = (targetPosition - transform.position).normalized;
 
-        if (Vector3.Distance(transform.position, _targetPosition) > _stoppingDistance)
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection, RotateSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, targetPosition) > _stoppingDistance)
         {
             transform.position += moveDirection * MoveSpeed * Time.deltaTime;
         }
         else
         {
-            OnStopMoving?.Invoke(this, EventArgs.Empty);
-            ActionComplete();
-        }
+            _currentPositionIndex++;
 
-        transform.forward = Vector3.Lerp(transform.forward, moveDirection, RotateSpeed * Time.deltaTime);
+            if (_currentPositionIndex >= _positionList.Count)
+            {
+                OnStopMoving?.Invoke(this, EventArgs.Empty);
+                ActionComplete();
+            }
+        }
     }
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        this._targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        List<GridPosition> pathGridPositionList = PathFinding.Instance.FindPath(_unit.GetGridPosition(), gridPosition);
+
+        _currentPositionIndex = 0;
+        _positionList = new List<Vector3>();
+
+        foreach (GridPosition pathGridPosition in pathGridPositionList)
+        {
+            _positionList.Add(LevelGrid.Instance.GetWorldPosition(pathGridPosition));
+        }
 
         OnStartMoving?.Invoke(this, EventArgs.Empty);
 

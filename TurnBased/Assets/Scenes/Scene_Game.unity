@@ -747,8 +747,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38238838, y: -0.036271263, z: 0.015024049, w: 0.9231673}
-  m_LocalPosition: {x: 8.78459, y: 10, z: -6.4291735}
+  m_LocalRotation: {x: 0.42382824, y: -0.035553243, z: 0.016652241, w: 0.9048914}
+  m_LocalPosition: {x: 8.78459, y: 11.99999, z: -6.4291735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2191,8 +2191,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816305379}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38238838, y: -0.036271263, z: 0.015024049, w: 0.9231673}
-  m_LocalPosition: {x: 8.78459, y: 10, z: -6.4291735}
+  m_LocalRotation: {x: 0.4238282, y: -0.035553243, z: 0.016652241, w: 0.9048914}
+  m_LocalPosition: {x: 8.78459, y: 11.99999, z: -6.4291735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4464,8 +4464,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 787970097517711409, guid: 4c1f36e21a89301419f55ed150fc3186,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 787970097517711409, guid: 4c1f36e21a89301419f55ed150fc3186,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 787970097517711409, guid: 4c1f36e21a89301419f55ed150fc3186,
         type: 3}
@@ -4475,7 +4480,7 @@ PrefabInstance:
     - target: {fileID: 787970097517711409, guid: 4c1f36e21a89301419f55ed150fc3186,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.2600002
+      value: -0.23999977
       objectReference: {fileID: 0}
     - target: {fileID: 787970097517711409, guid: 4c1f36e21a89301419f55ed150fc3186,
         type: 3}
@@ -4943,7 +4948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 10, z: -10}
+  m_FollowOffset: {x: 0, y: 11.99998, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
