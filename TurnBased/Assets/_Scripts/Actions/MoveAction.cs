@@ -57,7 +57,7 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        List<GridPosition> pathGridPositionList = PathFinding.Instance.FindPath(_unit.GetGridPosition(), gridPosition);
+        List<GridPosition> pathGridPositionList = PathFinding.Instance.FindPath(_unit.GetGridPosition(), gridPosition, out int pathLenght);
 
         _currentPositionIndex = 0;
         _positionList = new List<Vector3>();
@@ -100,6 +100,23 @@ public class MoveAction : BaseAction
                 if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                 {
                     // There is a unit on this position = the grid obj list is not empty = count > 0
+                    continue;
+                }
+
+                if (!PathFinding.Instance.IsWalkableGridPosition(testGridPosition))
+                {
+                    continue;
+                }
+
+                if (!PathFinding.Instance.HasPath(unitGridPosition, testGridPosition))
+                {
+                    continue;
+                }
+
+                int pathFindingDistanceMultiplier = 10;
+                if (PathFinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > _maxMoveDistance * pathFindingDistanceMultiplier)
+                {
+                    // Path is too long
                     continue;
                 }
 
