@@ -685,6 +685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651d062e90a4aea45b309fc6a7c4b548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _obstaclesLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   _maxShootRange: 4
   _aimingStateTime: 1
   _shootingStateTime: 0.1

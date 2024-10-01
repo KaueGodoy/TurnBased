@@ -12,9 +12,9 @@ public class ShootAction : BaseAction
         public Unit ShootingUnit { get; set; }
     }
 
+    [SerializeField] private LayerMask _obstaclesLayerMask;
     [SerializeField] private int _maxShootRange = 4;
     public int MaxShootRange { get { return _maxShootRange; } set { _maxShootRange = value; } }
-
 
     [Header("Shooting Timers")]
     [SerializeField] private float _aimingStateTime = 1;
@@ -149,6 +149,20 @@ public class ShootAction : BaseAction
                     continue;
                 }
 
+                Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+
+                float unitShoulderHeight = 1.5f;
+                if (Physics.Raycast(
+                    unitWorldPosition + Vector3.up * unitShoulderHeight,
+                    shootDirection,
+                    Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()),
+                    _obstaclesLayerMask))
+                {
+                    // Blocked by obstacle
+                    continue;
+                }
+
                 //Debug.Log(testGridPosition);
                 validGridPositionList.Add(testGridPosition);
             }
@@ -188,7 +202,7 @@ public class ShootAction : BaseAction
         return new EnemyAIAction
         {
             GridPosition = gridPosition,
-            ActionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f) ,
+            ActionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f),
         };
     }
 
