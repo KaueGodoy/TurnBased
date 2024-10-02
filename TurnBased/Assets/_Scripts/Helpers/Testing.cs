@@ -14,7 +14,7 @@ public class Testing : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            ScreenShake.Instance.Shake(5f);
+           
         }
     }
 
@@ -34,5 +34,10 @@ public class Testing : MonoBehaviour
                 10f
                 );
         }
+    }
+
+    private void TestShakeScreen(float intensity)
+    {
+        ScreenShake.Instance.Shake(intensity);
     }
 }

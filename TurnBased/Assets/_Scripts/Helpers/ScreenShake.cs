@@ -5,7 +5,6 @@ public class ScreenShake : MonoBehaviour
 {
     public static ScreenShake Instance { get; private set; }
 
-
     private CinemachineImpulseSource _cinemachineImpulseSource;
 
     private void Awake()

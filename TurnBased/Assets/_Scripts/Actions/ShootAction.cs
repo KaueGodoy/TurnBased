@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ShootAction : BaseAction
 {
+    public static event EventHandler<OnShootEventArgs> OnAnyShoot;
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs
     {
@@ -77,6 +78,12 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
+        OnAnyShoot?.Invoke(this, new OnShootEventArgs
+        {
+            TargetUnit = _targetUnit,
+            ShootingUnit = _unit
+        });
+
         OnShoot?.Invoke(this, new OnShootEventArgs
         {
             TargetUnit = _targetUnit,
@@ -173,7 +180,6 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-
         _targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
         //Debug.Log("Aiming");
 
