@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class GrenadeAction : BaseAction
 {
+    [SerializeField] private Transform _grenadeProjectilePrefab;
+
+    [SerializeField] private int _maxThrowDistance = 7;
+    public int MaxThrowDistance { get { return _maxThrowDistance; } set { _maxThrowDistance = value; } }
+
     protected override void Awake()
     {
         base.Awake();
@@ -13,8 +18,6 @@ public class GrenadeAction : BaseAction
     private void Update()
     {
         if (!_isActive) return;
-        
-        ActionComplete();
     }
 
     public override string GetActionName()
@@ -33,17 +36,48 @@ public class GrenadeAction : BaseAction
 
     public override List<GridPosition> GetValidActionGridPositionList()
     {
+        List<GridPosition> validGridPositionList = new List<GridPosition>();
+
         GridPosition unitGridPosition = _unit.GetGridPosition();
 
-        return new List<GridPosition>
+        for (int x = -MaxThrowDistance; x <= MaxThrowDistance; x++)
         {
-            unitGridPosition
-        };
+            for (int z = -MaxThrowDistance; z <= MaxThrowDistance; z++)
+            {
+                GridPosition offsetGridPosition = new GridPosition(x, z);
+                GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
+
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+                    // grid position with x and z >= 0 and within width and height
+                    continue;
+                }
+
+                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+                if (testDistance > MaxThrowDistance)
+                {
+                    continue;
+                }
+
+                //Debug.Log(testGridPosition);
+                validGridPositionList.Add(testGridPosition);
+            }
+        }
+
+        return validGridPositionList;
     }
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        Debug.Log("GrenadeAction");
+        Transform grenadeProjectileTransform = Instantiate(_grenadeProjectilePrefab, _unit.GetWorldPosition(), Quaternion.identity);
+        GrenadeProjectile grenadeProjectile = grenadeProjectileTransform.GetComponent<GrenadeProjectile>();
+        grenadeProjectile.Setup(gridPosition, OnGrenadeActionCompleted);
+
         ActionStart(onActionComplete);
+    }
+
+    private void OnGrenadeActionCompleted()
+    {
+        ActionComplete();
     }
 }

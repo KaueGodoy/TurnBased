@@ -707,6 +707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b375e0801f70deb4aa5300eee1dbcc75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _grenadeProjectilePrefab: {fileID: 2733835105021036788, guid: 1729a752a721b1a44939ed9afc896609,
+    type: 3}
+  _maxThrowDistance: 7
 --- !u!114 &527888610162221747
 MonoBehaviour:
   m_ObjectHideFlags: 0
