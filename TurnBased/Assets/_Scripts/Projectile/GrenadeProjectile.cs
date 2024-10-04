@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class GrenadeProjectile : MonoBehaviour
 {
+    public static event EventHandler OnAnyGrenadeExploded;
+
+    [SerializeField] private Transform _grenadeExplosionVFXPrefab;
+    [SerializeField] private Transform _trailRenderer;
+    [SerializeField] private AnimationCurve _arcYAnimationCurve;
+
     [SerializeField] private float _moveSpeed = 15f;
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
 
@@ -15,14 +21,24 @@ public class GrenadeProjectile : MonoBehaviour
     private Action _onGrenadeBehaviourComplete;
     private Vector3 _targetPosition;
 
+    private Vector3 _positionXZ;
+    private float _totalDistance;
+
     private void Update()
     {
-        Vector3 moveDir = (_targetPosition - transform.position).normalized;
+        Vector3 moveDir = (_targetPosition - _positionXZ).normalized;
 
-        transform.position += moveDir * MoveSpeed * Time.deltaTime;
+        _positionXZ += moveDir * MoveSpeed * Time.deltaTime;
+
+        float distance = Vector3.Distance(_positionXZ, _targetPosition);
+        float distanceNormalized = 1 - distance / _totalDistance;
+
+        float positionY = _arcYAnimationCurve.Evaluate(distanceNormalized);
+
+        transform.position = new Vector3(_positionXZ.x, positionY, _positionXZ.z);
 
         float reachedTargetDistance = .2f;
-        if (Vector3.Distance(transform.position, _targetPosition) < reachedTargetDistance)
+        if (Vector3.Distance(_positionXZ, _targetPosition) < reachedTargetDistance)
         {
             Collider[] colliderArray = Physics.OverlapSphere(_targetPosition, DamageRadius);
 
@@ -33,6 +49,13 @@ public class GrenadeProjectile : MonoBehaviour
                     targetUnit.TakeDamage(DamageAmount);
                 }
             }
+
+            OnAnyGrenadeExploded?.Invoke(this, EventArgs.Empty);
+
+            _trailRenderer.transform.parent = null;
+
+            float offset = 1f;
+            Instantiate(_grenadeExplosionVFXPrefab, _targetPosition + Vector3.up * offset, Quaternion.identity);
 
             Destroy(gameObject);
 
@@ -45,5 +68,10 @@ public class GrenadeProjectile : MonoBehaviour
     {
         this._onGrenadeBehaviourComplete = onGrenadeBehaviourComplete;
         _targetPosition = LevelGrid.Instance.GetWorldPosition(targetGridPosition);
+
+        _positionXZ = transform.position;
+        _positionXZ.y = 0;
+
+        _totalDistance = Vector3.Distance(_positionXZ, _targetPosition);
     }
 }
