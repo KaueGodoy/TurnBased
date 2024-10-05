@@ -250,6 +250,11 @@ public class PathFinding : MonoBehaviour
         return lowestFCostPathNode;
     }
 
+    public void SetWalkableGridPosition(GridPosition gridPosition, bool isWalkable)
+    {
+        _gridSystem.GetGridObject(gridPosition).IsWalkable = isWalkable;
+    }
+
     public bool IsWalkableGridPosition(GridPosition gridPosition)
     {
         return _gridSystem.GetGridObject(gridPosition).IsWalkable;
