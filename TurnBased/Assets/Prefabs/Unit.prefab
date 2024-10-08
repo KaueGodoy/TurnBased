@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 8450059876715164368}
   - component: {fileID: -6552531855263123144}
   - component: {fileID: 4438633319643686005}
+  - component: {fileID: -1155051900767468671}
   - component: {fileID: 5890633890912755155}
   - component: {fileID: 4990309600165827947}
   - component: {fileID: 4681601599956664902}
@@ -233,6 +234,19 @@ MonoBehaviour:
   _grenadeProjectilePrefab: {fileID: 2733835105021036788, guid: 1729a752a721b1a44939ed9afc896609,
     type: 3}
   _maxThrowDistance: 7
+--- !u!114 &-1155051900767468671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941343810408358010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed6fddde3564844eb8629738c3067c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxSwordDistance: 1
 --- !u!114 &5890633890912755155
 MonoBehaviour:
   m_ObjectHideFlags: 0
