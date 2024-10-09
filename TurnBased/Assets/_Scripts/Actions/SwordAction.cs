@@ -9,6 +9,10 @@ public class SwordAction : BaseAction
     public int MaxSwordDistance { get { return _maxSwordDistance; } set { _maxSwordDistance = value; } }
     public int Damage { get { return _damage; } set { _damage = value; } }
 
+    public event EventHandler OnSwordActionStarted;
+    public event EventHandler OnSwordActionCompleted;
+    public static event EventHandler OnAnySwordHit;
+
     private enum State
     {
         SwingingSwordBeforeHit,
@@ -59,8 +63,10 @@ public class SwordAction : BaseAction
                 _currentState = State.SwingingSwordAfterHit;
                 _stateTimer = _afterHitStateTimer;
                 _targetUnit.TakeDamage(Damage);
+                OnAnySwordHit?.Invoke(this, EventArgs.Empty);
                 break;
             case State.SwingingSwordAfterHit:
+                OnSwordActionCompleted?.Invoke(this, EventArgs.Empty);
                 ActionComplete();
                 break;
         }
@@ -127,6 +133,8 @@ public class SwordAction : BaseAction
 
         _currentState = State.SwingingSwordBeforeHit;
         _stateTimer = _beforeHitStateTimer;
+
+        OnSwordActionStarted?.Invoke(this, EventArgs.Empty);
 
         ActionStart(onActionComplete);
     }
