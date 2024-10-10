@@ -729,6 +729,7 @@ GameObject:
   - component: {fileID: 5932997251902618707}
   - component: {fileID: -4555063208209325924}
   - component: {fileID: -7006223711343246170}
+  - component: {fileID: 6224619986910069495}
   - component: {fileID: 527888610162221747}
   - component: {fileID: 1581697370138526996}
   - component: {fileID: -7863158429911635672}
@@ -870,6 +871,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxSwordDistance: 1
   _damage: 100
+--- !u!114 &6224619986910069495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932545763670385880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e39dcec5388604486861cf7e271a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxInteractDistance: 1
 --- !u!114 &527888610162221747
 MonoBehaviour:
   m_ObjectHideFlags: 0
