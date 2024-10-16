@@ -58,6 +58,14 @@ public class GridSystemVisual : MonoBehaviour
         LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
 
         UpdateGridVisual();
+
+        for (int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
+        {
+            for (int z = 0; z < LevelGrid.Instance.GetHeight(); z++)
+            {
+                _gridSystemVisualSingleArray[x, z].Show(GetGridVisualTypeMaterial(GridVisualType.White));
+            }
+        }
     }
 
     private void LevelGrid_OnAnyUnitMovedGridPosition(object sender, System.EventArgs e)
