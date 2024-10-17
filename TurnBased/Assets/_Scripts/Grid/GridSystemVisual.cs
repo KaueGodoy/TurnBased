@@ -27,6 +27,7 @@ public class GridSystemVisual : MonoBehaviour
     [SerializeField] private List<GridVisualTypeMaterial> _gridVisualTypeMaterialList;
 
     private GridSystemVisualSingle[,] _gridSystemVisualSingleArray;
+    private GridSystemVisualSingle _lastSelectedGridSystemSingle;
 
     private void Awake()
     {
@@ -66,6 +67,28 @@ public class GridSystemVisual : MonoBehaviour
                 _gridSystemVisualSingleArray[x, z].Show(GetGridVisualTypeMaterial(GridVisualType.White));
             }
         }
+    }
+
+    private void Update()
+    {
+        if (_lastSelectedGridSystemSingle != null)
+        {
+            _lastSelectedGridSystemSingle.HideSelected();
+        }
+
+        Vector3 mouseWorldPosition = MouseWorld.GetPosition();
+        GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(mouseWorldPosition);
+
+        if (LevelGrid.Instance.IsValidGridPosition(gridPosition))
+        {
+            _lastSelectedGridSystemSingle = _gridSystemVisualSingleArray[gridPosition.x, gridPosition.z];
+        }
+
+        if (_lastSelectedGridSystemSingle != null)
+        {
+            _lastSelectedGridSystemSingle.ShowSelected();
+        }
+
     }
 
     private void LevelGrid_OnAnyUnitMovedGridPosition(object sender, System.EventArgs e)

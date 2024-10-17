@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GridSystemHex<TGridObject>
@@ -39,10 +40,37 @@ public class GridSystemHex<TGridObject>
 
     public GridPosition GetGridPosition(Vector3 worldPosition)
     {
-        return new GridPosition(
+        GridPosition roughXZ = new GridPosition(
             Mathf.RoundToInt(worldPosition.x / _cellSize),
-            Mathf.RoundToInt(worldPosition.z / _cellSize)
-            );
+            Mathf.RoundToInt(worldPosition.z / _cellSize / HexVerticalOffsetMultiplier)
+        );
+
+        bool oddRow = roughXZ.z % 2 == 1;
+
+        List<GridPosition> neighbourGridPositionList = new List<GridPosition>
+        {
+            roughXZ + new GridPosition(-1, 0),
+            roughXZ + new GridPosition(+1, 0),
+
+            roughXZ + new GridPosition(0, +1),
+            roughXZ + new GridPosition(0, -1),
+
+            roughXZ + new GridPosition(oddRow ? +1 : -1, +1),
+            roughXZ + new GridPosition(oddRow ? +1 : -1, -1),
+        };
+
+        GridPosition closestGridPosition = roughXZ;
+
+        foreach (GridPosition neighbourGridPosition in neighbourGridPositionList)
+        {
+            if (Vector3.Distance(worldPosition, GetWorldPosition(neighbourGridPosition)) <
+               Vector3.Distance(worldPosition, GetWorldPosition(closestGridPosition)))
+            {
+                closestGridPosition = neighbourGridPosition;
+            }
+        }
+
+        return closestGridPosition;
     }
 
     public void CreateDebugObjects(Transform debugPrefab)
