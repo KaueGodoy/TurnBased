@@ -7,15 +7,19 @@ public class GridSystemHex<TGridObject>
     private int _width;
     private int _height;
     private float _cellSize;
+    private int _floor;
+    private float _floorHeight;
     private TGridObject[,] _gridObjectArray;
 
     private const float HexVerticalOffsetMultiplier = 0.75f;
 
-    public GridSystemHex(int width, int height, float cellSize, Func<GridSystemHex<TGridObject>, GridPosition, TGridObject> createGridObject)
+    public GridSystemHex(int width, int height, float cellSize, int floor, float floorHeight, Func<GridSystemHex<TGridObject>, GridPosition, TGridObject> createGridObject)
     {
         _width = width;
         _height = height;
         _cellSize = cellSize;
+        _floor = floor;
+        _floorHeight = floorHeight;
 
         _gridObjectArray = new TGridObject[width, height];
 
@@ -23,7 +27,7 @@ public class GridSystemHex<TGridObject>
         {
             for (int z = 0; z < height; z++)
             {
-                GridPosition gridPosition = new GridPosition(x, z);
+                GridPosition gridPosition = new GridPosition(x, z, floor);
                 _gridObjectArray[x, z] = createGridObject(this, gridPosition);
                 //Debug.DrawLine(GetWorldPosition(x, z), GetWorldPosition(x, z) + Vector3.right * .2f, Color.white, 1000);
             }
@@ -35,28 +39,30 @@ public class GridSystemHex<TGridObject>
         return
             new Vector3(gridPosition.x, 0, 0) * _cellSize +
             new Vector3(0, 0, gridPosition.z) * _cellSize * HexVerticalOffsetMultiplier +
-            (((gridPosition.z % 2) == 1) ? new Vector3(1, 0, 0) * _cellSize * .5f : Vector3.zero);
+            (((gridPosition.z % 2) == 1) ? new Vector3(1, 0, 0) * _cellSize * .5f : Vector3.zero) +
+            new Vector3(0, gridPosition.floor, 0) * _floorHeight;
     }
 
     public GridPosition GetGridPosition(Vector3 worldPosition)
     {
         GridPosition roughXZ = new GridPosition(
             Mathf.RoundToInt(worldPosition.x / _cellSize),
-            Mathf.RoundToInt(worldPosition.z / _cellSize / HexVerticalOffsetMultiplier)
+            Mathf.RoundToInt(worldPosition.z / _cellSize / HexVerticalOffsetMultiplier),
+            _floor
         );
 
         bool oddRow = roughXZ.z % 2 == 1;
 
         List<GridPosition> neighbourGridPositionList = new List<GridPosition>
         {
-            roughXZ + new GridPosition(-1, 0),
-            roughXZ + new GridPosition(+1, 0),
+            roughXZ + new GridPosition(-1, 0, _floor),
+            roughXZ + new GridPosition(+1, 0, _floor),
 
-            roughXZ + new GridPosition(0, +1),
-            roughXZ + new GridPosition(0, -1),
+            roughXZ + new GridPosition(0, +1, _floor),
+            roughXZ + new GridPosition(0, -1, _floor),
 
-            roughXZ + new GridPosition(oddRow ? +1 : -1, +1),
-            roughXZ + new GridPosition(oddRow ? +1 : -1, -1),
+            roughXZ + new GridPosition(oddRow ? +1 : -1, +1, _floor),
+            roughXZ + new GridPosition(oddRow ? +1 : -1, -1, _floor),
         };
 
         GridPosition closestGridPosition = roughXZ;
@@ -79,7 +85,7 @@ public class GridSystemHex<TGridObject>
         {
             for (int z = 0; z < _height; z++)
             {
-                GridPosition gridPosition = new GridPosition(x, z);
+                GridPosition gridPosition = new GridPosition(x, z, _floor);
                 Transform debugTransform = GameObject.Instantiate(debugPrefab, GetWorldPosition(gridPosition), Quaternion.identity);
                 GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
                 gridDebugObject.SetGridObject(GetGridObject(gridPosition));
@@ -98,7 +104,8 @@ public class GridSystemHex<TGridObject>
         return gridPosition.x >= 0 &&
                gridPosition.z >= 0 &&
                gridPosition.x < _width &&
-               gridPosition.z < _height;
+               gridPosition.z < _height &&
+               gridPosition.floor == _floor;
     }
 
     public int GetWidth()
