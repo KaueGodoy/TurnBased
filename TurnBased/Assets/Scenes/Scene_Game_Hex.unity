@@ -271,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 133730463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 3.001, z: 51.49}
+  m_LocalPosition: {x: 0, y: 3.001, z: 51}
   m_LocalScale: {x: 10, y: 1, z: 7.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -319,7 +319,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d243b453f2525c94fa5efbe8a7f93d44, type: 2}
+  - {fileID: 2100000, guid: c05f4662872a714499176b30313a15f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -955,7 +955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4238284, y: -0.035553202, z: 0.016652228, w: 0.90489125}
+  m_LocalRotation: {x: 0.4238284, y: -0.035553228, z: 0.016652241, w: 0.90489125}
   m_LocalPosition: {x: 8.78459, y: 12, z: -6.4291735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2911,7 +2911,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816305379}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42382836, y: -0.0355532, z: 0.016652228, w: 0.9048913}
+  m_LocalRotation: {x: 0.42382836, y: -0.035553224, z: 0.01665224, w: 0.9048913}
   m_LocalPosition: {x: 8.78459, y: 12, z: -6.4291735}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6418,17 +6418,17 @@ PrefabInstance:
     - target: {fileID: 9112395036759098963, guid: 80ecf2dc95acc114fb26ff8d1920fe07,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9112395036759098963, guid: 80ecf2dc95acc114fb26ff8d1920fe07,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9112395036759098963, guid: 80ecf2dc95acc114fb26ff8d1920fe07,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 9112395036759098963, guid: 80ecf2dc95acc114fb26ff8d1920fe07,
         type: 3}

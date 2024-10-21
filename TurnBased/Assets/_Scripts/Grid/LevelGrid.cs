@@ -124,5 +124,6 @@ public class LevelGrid : MonoBehaviour
     public bool IsValidGridPosition(GridPosition gridPosition) => GetGridSystem(gridPosition.floor).IsValidGridPosition(gridPosition);
     public int GetWidth() => GetGridSystem(0).GetWidth();
     public int GetHeight() => GetGridSystem(0).GetHeight();
+    public int GetFloorAmount() => (int)_floorAmount;
 
 }
