@@ -12,7 +12,7 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private int _width;
     [SerializeField] private int _height;
     [SerializeField] private float _cellSize;
-    [SerializeField] private float _floorAmount;
+    [SerializeField] private int _floorAmount;
 
     //private GridSystemHex<GridObject> _gridSystem;
     private List<GridSystemHex<GridObject>> _gridSystemList;
@@ -46,7 +46,7 @@ public class LevelGrid : MonoBehaviour
 
     private void Start()
     {
-        PathFinding.Instance.Setup(_width, _height, _cellSize);
+        PathFinding.Instance.Setup(_width, _height, _cellSize, _floorAmount);
     }
 
     private GridSystemHex<GridObject> GetGridSystem(int floor)
@@ -121,9 +121,20 @@ public class LevelGrid : MonoBehaviour
     }
 
     public Vector3 GetWorldPosition(GridPosition gridPosition) => GetGridSystem(gridPosition.floor).GetWorldPosition(gridPosition);
-    public bool IsValidGridPosition(GridPosition gridPosition) => GetGridSystem(gridPosition.floor).IsValidGridPosition(gridPosition);
+    public bool IsValidGridPosition(GridPosition gridPosition)
+    {
+        if (gridPosition.floor < 0 || gridPosition.floor >= _floorAmount)
+        {
+            return false;
+        }
+        else
+        {
+            return GetGridSystem(gridPosition.floor).IsValidGridPosition(gridPosition);
+        }
+    }
+
     public int GetWidth() => GetGridSystem(0).GetWidth();
     public int GetHeight() => GetGridSystem(0).GetHeight();
-    public int GetFloorAmount() => (int)_floorAmount;
+    public int GetFloorAmount() => _floorAmount;
 
 }

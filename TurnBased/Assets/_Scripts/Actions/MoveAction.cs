@@ -82,46 +82,49 @@ public class MoveAction : BaseAction
         {
             for (int z = -_maxMoveDistance; z <= _maxMoveDistance; z++)
             {
-                GridPosition offsetGridPosition = new GridPosition(x, z, 0);
-                GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
-
-                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                for (int floor = -_maxMoveDistance; floor <= _maxMoveDistance; floor++)
                 {
-                    // grid position with x and z >= 0 and within width and height
-                    continue;
-                }
+                    GridPosition offsetGridPosition = new GridPosition(x, z, floor);
+                    GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
 
-                if (unitGridPosition == testGridPosition)
-                {
-                    // Same grid position where the unit is already at
-                    continue;
-                }
+                    if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                    {
+                        // grid position with x and z >= 0 and within width and height
+                        continue;
+                    }
 
-                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
-                {
-                    // There is a unit on this position = the grid obj list is not empty = count > 0
-                    continue;
-                }
+                    if (unitGridPosition == testGridPosition)
+                    {
+                        // Same grid position where the unit is already at
+                        continue;
+                    }
 
-                if (!PathFinding.Instance.IsWalkableGridPosition(testGridPosition))
-                {
-                    continue;
-                }
+                    if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    {
+                        // There is a unit on this position = the grid obj list is not empty = count > 0
+                        continue;
+                    }
 
-                if (!PathFinding.Instance.HasPath(unitGridPosition, testGridPosition))
-                {
-                    continue;
-                }
+                    if (!PathFinding.Instance.IsWalkableGridPosition(testGridPosition))
+                    {
+                        continue;
+                    }
 
-                int pathFindingDistanceMultiplier = 10;
-                if (PathFinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > _maxMoveDistance * pathFindingDistanceMultiplier)
-                {
-                    // Path is too long
-                    continue;
-                }
+                    if (!PathFinding.Instance.HasPath(unitGridPosition, testGridPosition))
+                    {
+                        continue;
+                    }
 
-                //Debug.Log(testGridPosition);
-                validGridPositionList.Add(testGridPosition);
+                    int pathFindingDistanceMultiplier = 10;
+                    if (PathFinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > _maxMoveDistance * pathFindingDistanceMultiplier)
+                    {
+                        // Path is too long
+                        continue;
+                    }
+
+                    //Debug.Log(testGridPosition);
+                    validGridPositionList.Add(testGridPosition);
+                }
             }
         }
 

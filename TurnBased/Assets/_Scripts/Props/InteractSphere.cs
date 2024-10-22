@@ -29,7 +29,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
     {
         if (!_isActive) return;
 
-
         _timer -= Time.deltaTime;
 
         if (_timer <= 0f)
