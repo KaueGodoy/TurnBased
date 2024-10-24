@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MoveAction : BaseAction
 {
@@ -19,6 +21,10 @@ public class MoveAction : BaseAction
 
     private float _stoppingDistance = 0.1f;
 
+    private float _differentFloorsTeleportTimer;
+    private float _differentFloorsTeleportTimerMax = .5f;
+    private bool _isChangingFloors;
+
     protected override void Awake()
     {
         base.Awake();
@@ -35,22 +41,52 @@ public class MoveAction : BaseAction
         if (!_isActive) return;
 
         Vector3 targetPosition = _positionList[_currentPositionIndex];
-        Vector3 moveDirection = (targetPosition - transform.position).normalized;
 
-        transform.forward = Vector3.Lerp(transform.forward, moveDirection, RotateSpeed * Time.deltaTime);
-
-        if (Vector3.Distance(transform.position, targetPosition) > _stoppingDistance)
+        if (_isChangingFloors)
         {
-            transform.position += moveDirection * MoveSpeed * Time.deltaTime;
+            Vector3 targetSameFloorPosition = targetPosition;
+            targetSameFloorPosition.y = transform.position.y;
+
+            Vector3 rotateDirection = (targetSameFloorPosition - transform.position).normalized;
+            transform.forward = Vector3.Slerp(transform.forward, rotateDirection, RotateSpeed * Time.deltaTime);
+
+            _differentFloorsTeleportTimer -= Time.deltaTime;
+
+            if (_differentFloorsTeleportTimer < 0f)
+            {
+                _isChangingFloors = false;
+                transform.position = targetPosition;
+            }
         }
         else
         {
+            Vector3 moveDirection = (targetPosition - transform.position).normalized;
+
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, RotateSpeed * Time.deltaTime);
+            transform.position += moveDirection * MoveSpeed * Time.deltaTime;
+        }
+
+        if (Vector3.Distance(transform.position, targetPosition) < _stoppingDistance)
+        {
+
             _currentPositionIndex++;
 
             if (_currentPositionIndex >= _positionList.Count)
             {
                 OnStopMoving?.Invoke(this, EventArgs.Empty);
                 ActionComplete();
+            }
+            else
+            {
+                targetPosition = _positionList[_currentPositionIndex];
+                GridPosition targetGridPosition = LevelGrid.Instance.GetGridPosition(targetPosition);
+                GridPosition unitGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+
+                if (targetGridPosition.floor != unitGridPosition.floor)
+                {
+                    _isChangingFloors = true;
+                    _differentFloorsTeleportTimer = _differentFloorsTeleportTimerMax;
+                }
             }
         }
     }
