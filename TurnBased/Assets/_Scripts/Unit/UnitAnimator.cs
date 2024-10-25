@@ -13,6 +13,8 @@ public class UnitAnimator : MonoBehaviour
     private string _isWalking = "IsWalking";
     private string _shoot = "Shoot";
     private string _swordSlash = "SwordSlash";
+    private string _jumpUp = "JumpUp";
+    private string _jumpDown = "JumpDown";
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class UnitAnimator : MonoBehaviour
         {
             moveAction.OnStartMoving += MoveAction_OnStartMoving;
             moveAction.OnStopMoving += MoveAction_OnStopMoving;
+            moveAction.OnChangedFloorsStarted += MoveAction_OnChangedFloorsStarted;
         }
 
         if (TryGetComponent<ShootAction>(out ShootAction shootAction))
@@ -30,6 +33,18 @@ public class UnitAnimator : MonoBehaviour
         {
             swordAction.OnSwordActionCompleted += SwordAction_OnSwordActionCompleted;
             swordAction.OnSwordActionStarted += SwordAction_OnSwordActionStarted;
+        }
+    }
+
+    private void MoveAction_OnChangedFloorsStarted(object sender, MoveAction.OnChangedFloorsStartedEventArgs e)
+    {
+        if (e.TargetGridPosition.floor > e.UnitGridPosition.floor)
+        {
+            _animator.SetTrigger(_jumpUp);
+        }
+        else
+        {
+            _animator.SetTrigger(_jumpDown);
         }
     }
 
@@ -58,8 +73,9 @@ public class UnitAnimator : MonoBehaviour
         BulletProjectile bulletProjectile = bulletProjectileTransform.GetComponent<BulletProjectile>();
 
         Vector3 targetUnitShootAtPosition = e.TargetUnit.GetWorldPosition();
-        targetUnitShootAtPosition.y = _shootPointTransform.position.y;
 
+        float unitShoulderHeight = 1.5f;
+        targetUnitShootAtPosition.y += unitShoulderHeight;
 
         bulletProjectile.Setup(targetUnitShootAtPosition);
     }

@@ -12,6 +12,12 @@ public class MoveAction : BaseAction
 
     public event EventHandler OnStartMoving;
     public event EventHandler OnStopMoving;
+    public event EventHandler<OnChangedFloorsStartedEventArgs> OnChangedFloorsStarted;
+    public class OnChangedFloorsStartedEventArgs : EventArgs
+    {
+        public GridPosition UnitGridPosition { get; set; }
+        public GridPosition TargetGridPosition { get; set; }
+    }
 
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
     public float RotateSpeed { get { return _rotateSpeed; } set { _rotateSpeed = value; } }
@@ -86,6 +92,13 @@ public class MoveAction : BaseAction
                 {
                     _isChangingFloors = true;
                     _differentFloorsTeleportTimer = _differentFloorsTeleportTimerMax;
+
+                    OnChangedFloorsStarted?.Invoke(this, new OnChangedFloorsStartedEventArgs
+                    {
+                        UnitGridPosition = unitGridPosition,
+                        TargetGridPosition = targetGridPosition,
+
+                    });
                 }
             }
         }

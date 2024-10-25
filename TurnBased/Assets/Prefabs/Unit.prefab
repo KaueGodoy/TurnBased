@@ -213,7 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstaclesLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 320
   _maxShootRange: 4
   _aimingStateTime: 1
   _shootingStateTime: 0.1
