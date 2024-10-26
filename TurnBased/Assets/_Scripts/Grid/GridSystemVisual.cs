@@ -63,7 +63,8 @@ public class GridSystemVisual : MonoBehaviour
         }
 
         UnitActionSystem.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
-        LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
+        UnitActionSystem.Instance.OnBusyChanged += UnitActionSystem_OnBusyChanged;
+        //LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
 
         UpdateGridVisual();
 
@@ -80,6 +81,11 @@ public class GridSystemVisual : MonoBehaviour
         //}
     }
 
+    private void UnitActionSystem_OnBusyChanged(object sender, bool e)
+    {
+        UpdateGridVisual();
+    }
+
     private void Update()
     {
         if (_lastSelectedGridSystemSingle != null)
@@ -87,7 +93,7 @@ public class GridSystemVisual : MonoBehaviour
             _lastSelectedGridSystemSingle.HideSelected();
         }
 
-        Vector3 mouseWorldPosition = MouseWorld.GetPosition();
+        Vector3 mouseWorldPosition = MouseWorld.GetPositionOnlyHitVisible();
         GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(mouseWorldPosition);
 
         if (LevelGrid.Instance.IsValidGridPosition(gridPosition))

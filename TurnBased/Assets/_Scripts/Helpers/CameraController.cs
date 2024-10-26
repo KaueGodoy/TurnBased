@@ -4,8 +4,10 @@ using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance { get; private set; }
+
     private const float Min_Follow_Y_Offset = 2f;
-    private const float Max_Follow_Y_Offset = 12f;
+    private const float Max_Follow_Y_Offset = 15f;
 
     [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
 
@@ -20,6 +22,11 @@ public class CameraController : MonoBehaviour
 
     private CinemachineTransposer _cinemachineTransposer;
     private Vector3 _targetFollowOffset;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -59,5 +66,10 @@ public class CameraController : MonoBehaviour
         _cinemachineTransposer.m_FollowOffset = Vector3.Lerp(_cinemachineTransposer.m_FollowOffset, _targetFollowOffset, Time.deltaTime * ZoomSpeed);
 
         //Debug.Log($"Cinemachine {_cinemachineTransposer.m_FollowOffset}, + Target {_targetFollowOffset}");
+    }
+
+    public float GetCameraHeight()
+    {
+        return _targetFollowOffset.y;
     }
 }

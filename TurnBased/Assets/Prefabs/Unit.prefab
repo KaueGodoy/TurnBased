@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 5890633890912755155}
   - component: {fileID: 4990309600165827947}
   - component: {fileID: 4681601599956664902}
+  - component: {fileID: 1491526987998433555}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -170,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isEnemy: 0
-  _maxActionPoints: 2
+  _maxActionPoints: 10
   _actionPoints: 2
 --- !u!114 &8816760565582213841
 MonoBehaviour:
@@ -186,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _rotateSpeed: 4
-  _maxMoveDistance: 4
+  _maxMoveDistance: 10
 --- !u!114 &8450059876715164368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ MonoBehaviour:
   _obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 320
-  _maxShootRange: 4
+  _maxShootRange: 10
   _aimingStateTime: 1
   _shootingStateTime: 0.1
   _coolOffStateTime: 0.5
@@ -309,6 +310,21 @@ MonoBehaviour:
   _ragdollPrefab: {fileID: 9112395036759098963, guid: 1213f5a7820efe24388ddd1046f2a00a,
     type: 3}
   _originalRootBone: {fileID: 4169094129293904182}
+--- !u!114 &1491526987998433555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941343810408358010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d0a4c6d4e9dce4c8a659f15128515d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dynamicFloorPosition: 1
+  _ignoreRendererList:
+  - {fileID: 8160836382750422883}
 --- !u!1 &5250223106787235231
 GameObject:
   m_ObjectHideFlags: 0
